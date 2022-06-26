@@ -28,8 +28,9 @@ app.get('/api/hello', function(req, res) {
 app.post('/api/shorturl',function(req,res){
   console.log(req.body);
   const REPLACE_REGEX = /^https?:\/\//i;
+  
   let url = req.body.url.replace(REPLACE_REGEX,'');
-  dns.lookup(url,function(err,result){
+  dns.lookup(url.split('/')[0],function(err,result){
     if(err==null){
       let i = arrShort.length;
       arrShort.push(req.body.url);
